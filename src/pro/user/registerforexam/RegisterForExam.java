@@ -6,6 +6,7 @@ public class RegisterForExam {
     Login login;//用户
     String Province;
     int Number;//考试人数
+    int toLevel;
     //考虑设置报名人数最大值，报名人数满之后就不能在报名
     boolean RFESucess=false;//考试报名成功与否
     public void setProvince(String province){
@@ -17,6 +18,11 @@ public class RegisterForExam {
     public void setLogin(Login login){
         this.login=login;
     }
+    public void setRFESucess(boolean bo){
+        this.RFESucess=bo;
+    }
+    public void setToLevel(int number){this.toLevel=number;};
+    public int getTolevel(){return toLevel;}
     public String getProvince(){
         return Province;
     }
@@ -25,9 +31,6 @@ public class RegisterForExam {
     }
     public Login getLogin(){
         return login;
-    }
-    public void setRFESucess(boolean bo){
-        this.RFESucess=bo;
     }
     public boolean getLoginSucess(){
         return RFESucess;

@@ -12,7 +12,7 @@ public class HandleLogin {
     public Login queryVerify(Login loginModel){
         String id =loginModel.getId();
         String pw =loginModel.getPassword();
-        String sqlStr="select id,password from user where "+"id = ? and password = ?";//在数据库中寻找指定的信息
+        String sqlStr="select id,password,province,level from user where "+"id = ? and password = ?";//在数据库中寻找指定的信息
         try {
             preSql =con.prepareStatement(sqlStr);
             preSql.setString(1,id);
@@ -22,11 +22,9 @@ public class HandleLogin {
                 loginModel.setLoginSucess(true);
                 JOptionPane.showMessageDialog(null,"登录成功","恭喜",JOptionPane.WARNING_MESSAGE);
                 //登录成功应该弹出个人信息  报告考试信息 并且报考后该考试不可再次报考
-                sqlStr="select province from user where "+"id = ?";//在数据库中寻找指定的信息
-                preSql =con.prepareStatement(sqlStr);
-                preSql.setString(1,id);
-                rs = preSql.executeQuery();
-                loginModel.setprovince(rs.getString(1));
+
+                loginModel.setprovince(rs.getString(3));
+                loginModel.setLevel(rs.getInt(4));
             }
             else {
                 loginModel.setLoginSucess(false);
@@ -35,7 +33,6 @@ public class HandleLogin {
             con.close();
         }
         catch (SQLException e){}
-        System.out.println( "error");
         return loginModel;
     }
 

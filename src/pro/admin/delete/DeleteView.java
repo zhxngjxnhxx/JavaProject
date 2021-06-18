@@ -42,7 +42,7 @@ public class DeleteView extends JPanel implements ActionListener{
         jPanel1.setLayout(new GridLayout(3, 1));
         JPanel jPanel10 = new JPanel();
         jPanel10.setLayout(new FlowLayout());
-        jPanel10.add(new JLabel("id:"));
+        jPanel10.add(new JLabel("学号:"));
         idtext = new JTextField(10);
         jPanel10.add(idtext);
         jPanel1.add(jPanel10);

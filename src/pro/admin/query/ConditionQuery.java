@@ -1,6 +1,8 @@
 package pro.admin.query;
 import tools.GetDBConnection;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,9 +15,15 @@ public class ConditionQuery extends JPanel implements ActionListener {
     JPanel jPanel0;
     JPanel jPanel1;
     JPanel jPanel3;
+    Connection con;
+    String [] tableHead;
+    String [][]content;//通用查询
+    JTable table;
+    Query findrecord=new Query();
     int flag=0;
     public ConditionQuery() {
-
+        table = new JTable();
+        findrecord = new Query();
         setLayout(new GridLayout(1,1));
 
         jRb1 = new JRadioButton("按学号查找");
@@ -40,6 +48,13 @@ public class ConditionQuery extends JPanel implements ActionListener {
         jPanel4.setLayout(new FlowLayout());
         jPanel4.add(jb);
         jPanel3.add(jPanel4);
+        findrecord.setDatabaseName("ncre");
+        findrecord.setSQL("select * from province_info");
+        content= findrecord.getRecord();//记录二维的
+        tableHead= findrecord.getColumnName();//表头
+//        table =new JTable(content,tableHead);
+        table.setEnabled(false);
+        add(table);
         add(jPanel3);
 
         jb.addActionListener(this);//添加监听事件
@@ -59,7 +74,6 @@ public class ConditionQuery extends JPanel implements ActionListener {
         //先获取用户选择了哪个条件,再获取Text框中用户输入的数据
         String info = "";
         String new_info="";
-//        jPanel3=new JPanel();
         for (Component c : this.jPanel0.getComponents()) {//获取用户选择的省份
             if (c instanceof JRadioButton) {
                 if (((JRadioButton) c).isSelected()) {
@@ -73,29 +87,20 @@ public class ConditionQuery extends JPanel implements ActionListener {
                 }
             }
         }
-        Connection con = GetDBConnection.connectionDB("ncre", "root", "0617");
-
+        con = GetDBConnection.connectionDB("ncre", "root", "0617");
         //如果没选 要进行相应处理
         String sqlStr = "select * from user where " + new_info + " = '" + jtf.getText()+"'";//省份要有单引号
-        JTable table = new JTable();
-        Query findrecord = new Query();
-        setLayout(new GridLayout());
         findrecord.setDatabaseName("ncre");
         findrecord.setSQL(sqlStr);
-        String[] tableHead;
-        String[][] content;
-        content = findrecord.getRecord();//记录二维的
-        tableHead = findrecord.getColumnName();//表头
-        table = new JTable(content, tableHead);
+        content= findrecord.getRecord();//记录二维的
+        tableHead= findrecord.getColumnName();//表头
+        TableModel tableModel=new DefaultTableModel(content,tableHead);
+        //				将TableModel对象传入Table表格
+        table.setModel(tableModel);
         table.setEnabled(false);
-        if(flag==0){
-            jPanel3.add(table);
-            jPanel3.validate();
-            flag=1;
-        }
-        else{
-             table.updateUI();
-        }
+        table.validate();
+        table.updateUI();
+
 
     }
 }

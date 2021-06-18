@@ -1,6 +1,5 @@
 import pro.user.login.LoginView;
 import pro.user.register.RegisterView;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,9 +12,8 @@ public class LoginandRegister extends JPanel{
         loginView=new LoginView();
         setLayout(new BorderLayout());
         p =new JTabbedPane();
-        p.add("我要注册",registerView);
         p.add("我要登录",loginView);
-
+        p.add("我要注册",registerView);
         p.validate();
         add(p,BorderLayout.CENTER);
     }

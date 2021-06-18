@@ -5,6 +5,7 @@ public class Login {
     String id;
     String password;
     String province="";
+    int level=0;
     public void setID(String id){
         this.id=id;
     }
@@ -14,6 +15,7 @@ public class Login {
     public void setprovince(String prv){
         province=prv;
     }
+    public void setLevel(int i){level=i;}
     public String getId(){
         return id;
     }
@@ -23,6 +25,7 @@ public class Login {
     public String getProvince(){
         return province;
     }
+    public int getLevel(){return level;}
     public void setLoginSucess(boolean bo){
         this.loginSucess=bo;
     }

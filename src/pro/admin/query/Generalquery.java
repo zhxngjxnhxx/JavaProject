@@ -1,6 +1,8 @@
 package pro.admin.query;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,7 +48,9 @@ public class Generalquery extends JPanel implements ActionListener{//查询 应�
         findrecord.setSQL("select * from province_info");
         content= findrecord.getRecord();//记录二维的
         tableHead= findrecord.getColumnName();//表头
-        table =new JTable(content,tableHead);
+        TableModel tableModel=new DefaultTableModel(content,tableHead);
+        //				将TableModel对象传入Table表格
+        table.setModel(tableModel);
         table.setEnabled(false);
         table.validate();
         table.updateUI();

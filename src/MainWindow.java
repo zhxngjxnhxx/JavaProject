@@ -1,3 +1,4 @@
+import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
 import pro.user.registerforexam.RFEview;
 import tools.InitGlobalFont;
 
@@ -10,22 +11,37 @@ public class MainWindow extends JFrame implements ActionListener {
     JButton computerButton;
     LoginandRegister view;
     MainWindow(){
+
+        setLayout(new GridLayout(3,1));
         view = new LoginandRegister();
         computerButton = new JButton("报名考试");
         computerButton.addActionListener(this);
-        add(view, BorderLayout.CENTER);
-        add(computerButton,BorderLayout.NORTH);
+        // 设置背景
+        JPanel j2=new JPanel();
+        JLabel lblBackground = new JLabel(); // 创建一个标签组件对象
+        //        URL resource = this.getClass().getResource("D:/JavaProjects/JavaProject/src/image/NCRE.png"); // 获取背景图片路径
+        ImageIcon icon = new ImageIcon("D:/JavaProjects/JavaProject/src/image/NCRE.png"); // 创建背景图片对象
+        lblBackground.setIcon(icon); // 设置标签组件要显示的图标
+        lblBackground.setBounds(350, 200, icon.getIconWidth(), icon.getIconHeight()); // 设置组件的显示位置及大小
+        j2.add(lblBackground); // 将组件添加到面板中
+        add(view);
+        add(j2);
+        JPanel j3 =new JPanel();
+        j3.setLayout(new BorderLayout());
+        j3.add(computerButton,BorderLayout.SOUTH);
+        add(j3);
+
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
-        setBounds(screenWidth/4, screenHeight/4, screenWidth/3, screenHeight/3);
+        setBounds(screenWidth/4, screenHeight/4, screenWidth/2, screenHeight/2);
         setVisible(true);
     }
     public void actionPerformed(ActionEvent e){
         if(view.isLoginSucess()==false){
-            JOptionPane.showMessageDialog(null,"请登录","登录提示",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"请先登录","登录提示",JOptionPane.WARNING_MESSAGE);
         }
         else {//调用报名考试
 //            setVisible(false);// 本窗口隐藏,
@@ -42,14 +58,16 @@ public class MainWindow extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                System.out.println("name:" + info.getName());
-                System.out.println("class:" + info.getClassName());
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                System.out.println("name:" + info.getName());
+//                System.out.println("class:" + info.getClassName());
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+            BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.generalNoTranslucencyShadow;
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            UIManager.put("RootPane.setupButtonVisible",false);
         }catch(Exception e) {
             System.out.println(e);
         }

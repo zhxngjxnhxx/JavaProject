@@ -37,7 +37,6 @@ public class Query {
         startQuery();
         return record;
     }
-
     private void startQuery() {
         Connection con;
         Statement sql;
@@ -66,7 +65,6 @@ public class Query {
             }
             con.close();
         } catch (SQLException e) {
-            System.out.println("请输入正确的表名"+e);
         }
     }
 }

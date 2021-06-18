@@ -15,7 +15,7 @@ public class RegisterView extends JPanel implements ActionListener{
         inputPassword=new JPasswordField(12);
         inputBirth=new JTextField(12);
         buttonRegister = new JButton("注册");
-        add(new JLabel("ID:"));
+        add(new JLabel("学号:"));
         add(inputID);
         add(new JLabel("密码:"));
         add(inputPassword);

@@ -41,13 +41,13 @@ public class Change extends JPanel implements ActionListener{
 
         JPanel jPanel10=new JPanel();
         jPanel10.setLayout(new FlowLayout());
-        jPanel10.add(new JLabel("id:"));
+        jPanel10.add(new JLabel("原学号:"));
         idtext=new JTextField(10);
         jPanel10.add(idtext);
 
         JPanel jPanel11=new JPanel();
         jPanel11.setLayout(new FlowLayout());
-        jPanel11.add(new JLabel("新id:"));
+        jPanel11.add(new JLabel("新学号:"));
         new_id=new JTextField(10);
         jPanel11.add(new_id);
 
@@ -66,7 +66,7 @@ public class Change extends JPanel implements ActionListener{
         jPanel2.setLayout(new GridLayout(2,1));
         JPanel jPanel20=new JPanel();
         jPanel20.setLayout(new FlowLayout());
-        jPanel20.add(new JLabel("省份:"));
+        jPanel20.add(new JLabel("旧省份名:"));
         provincetext=new JTextField(10);
         jPanel20.add(provincetext);
 
