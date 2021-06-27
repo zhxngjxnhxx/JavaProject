@@ -12,10 +12,10 @@ public class HandleRegister {
     Connection con;
     PreparedStatement preSql;
     public HandleRegister(){
-        Connection con = GetDBConnection.connectionDB("ncre", "root", "0617");
+           con = GetDBConnection.connectionDB("ncre", "root", "0617");
     }
     public void writeRegisterModel(Register register){
-        String sqlstr="insert into register values(?,?,?)";
+        String sqlstr="insert into user values(?,?,?,'',0)";
         int ok=0;
         try {
             preSql=con.prepareStatement(sqlstr);
@@ -27,6 +27,7 @@ public class HandleRegister {
         }
         catch (SQLException e){
             JOptionPane.showMessageDialog(null,"id不能重复","警告",JOptionPane.WARNING_MESSAGE);
+            System.out.println(e);
         };
         if(ok!=0){
             JOptionPane.showMessageDialog(null,"注册成功","恭喜",JOptionPane.WARNING_MESSAGE);

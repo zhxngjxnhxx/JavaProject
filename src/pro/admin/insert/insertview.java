@@ -149,30 +149,30 @@ public class insertview extends JPanel implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
-//        JFrame jFrame = new JFrame();
+//    public static void main(String[] args) {
+////        JFrame jFrame = new JFrame();
+////
+////        insertview kapian = new insertview();
+////        jFrame.add(kapian);
+////        jFrame.setVisible(true);
+//        if (true) {
+//            Connection con = GetDBConnection.connectionDB("ncre", "root", "0617");
+//            PreparedStatement presql = null;
+//            ResultSet rs;
+//            if (con == null) {
+//                return;
+//            }
+//            String sqlstr = "insert into user(id,password) values(?,?)";
+//            try {
+//                presql = con.prepareStatement(sqlstr);
+//                presql.setString(1, "129");
+//                presql.setString(2, "123456");
+//                int ok = presql.executeUpdate();
+//                con.close();
+//            } catch (SQLException sqlException) {
+//                JOptionPane.showMessageDialog(null, "记录中id不能重复,请重新操作", "插入失败", JOptionPane.WARNING_MESSAGE);
 //
-//        insertview kapian = new insertview();
-//        jFrame.add(kapian);
-//        jFrame.setVisible(true);
-        if (true) {
-            Connection con = GetDBConnection.connectionDB("ncre", "root", "0617");
-            PreparedStatement presql = null;
-            ResultSet rs;
-            if (con == null) {
-                return;
-            }
-            String sqlstr = "insert into user(id,password) values(?,?)";
-            try {
-                presql = con.prepareStatement(sqlstr);
-                presql.setString(1, "129");
-                presql.setString(2, "123456");
-                int ok = presql.executeUpdate();
-                con.close();
-            } catch (SQLException sqlException) {
-                JOptionPane.showMessageDialog(null, "记录中id不能重复,请重新操作", "插入失败", JOptionPane.WARNING_MESSAGE);
-
-            }
-        }
-    }
+//            }
+//        }
+//    }
 }

@@ -1,5 +1,6 @@
 package pro.admin.change;
 
+import pro.admin.query.Query;
 import tools.GetDBConnection;
 
 import java.awt.*;
@@ -123,6 +124,14 @@ public class Change extends JPanel implements ActionListener{
                 if (con == null) {
                     return;
                 }
+                Query find =new Query();
+                find.setDatabaseName("ncre");
+                find.setSQL("select * from user where id='"+idtext.getText()+"' ");
+                String [][]str = find.getRecord();
+                if(str.length==0){//查找不到记录
+                    JOptionPane.showMessageDialog(null, "修改失败,因为该记录不存在", "修改失败", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 String sqlstr = "update  user set id = ?,password =? where id='"+idtext.getText()+"' ";
                 try {
                     presql = con.prepareStatement(sqlstr);
@@ -144,6 +153,14 @@ public class Change extends JPanel implements ActionListener{
                 if (con == null) {
                     return;
                 }
+                Query find =new Query();
+                find.setDatabaseName("ncre");
+                find.setSQL("select * from province_info where province='"+provincetext.getText()+"' ");
+                String [][]str = find.getRecord();
+                if(str.length==0){//查找不到记录
+                    JOptionPane.showMessageDialog(null, "修改失败,因为该记录不存在", "修改失败", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 String sqlstr = "update  province_info set province = ? where province='"+provincetext.getText()+"' ";
                 try {
                     presql = con.prepareStatement(sqlstr);
@@ -162,26 +179,26 @@ public class Change extends JPanel implements ActionListener{
 
     }
 
-    public static void main(String[] args) {
-//        JFrame jFrame=new JFrame();
-//        Change kapian = new Change();
-//        jFrame.add(kapian);
-//        jFrame.setVisible(true);
-        Connection con;
-        con=GetDBConnection.connectionDB("ncre","root","0617");
-        String sqlstr = "update user set id = ?,password =? where id='"+"130"+"' ";
-        try {
-            PreparedStatement presql = con.prepareStatement(sqlstr);
-            presql.setString(1, "133");
-            presql.setString(2,"1");
-            int ok = presql.executeUpdate();
-            JOptionPane.showMessageDialog(null, "修改成功", "修改成功", JOptionPane.WARNING_MESSAGE);
-            con.close();
-        } catch (SQLException sqlException) {
-            JOptionPane.showMessageDialog(null, "修改失败", "修改失败", JOptionPane.WARNING_MESSAGE);
-            System.out.println(sqlException);
-        }
-
-    }
+//    public static void main(String[] args) {
+////        JFrame jFrame=new JFrame();
+////        Change kapian = new Change();
+////        jFrame.add(kapian);
+////        jFrame.setVisible(true);
+//        Connection con;
+//        con=GetDBConnection.connectionDB("ncre","root","0617");
+//        String sqlstr = "update user set id = ?,password =? where id='"+"130"+"' ";
+//        try {
+//            PreparedStatement presql = con.prepareStatement(sqlstr);
+//            presql.setString(1, "133");
+//            presql.setString(2,"1");
+//            int ok = presql.executeUpdate();
+//            JOptionPane.showMessageDialog(null, "修改成功", "修改成功", JOptionPane.WARNING_MESSAGE);
+//            con.close();
+//        } catch (SQLException sqlException) {
+//            JOptionPane.showMessageDialog(null, "修改失败", "修改失败", JOptionPane.WARNING_MESSAGE);
+//            System.out.println(sqlException);
+//        }
+//
+//    }
 
 }

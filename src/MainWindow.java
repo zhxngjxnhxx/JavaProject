@@ -1,4 +1,5 @@
 import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
+import pro.user.LoginandRegister;
 import pro.user.registerforexam.RFEview;
 import tools.InitGlobalFont;
 
@@ -11,7 +12,6 @@ public class MainWindow extends JFrame implements ActionListener {
     JButton computerButton;
     LoginandRegister view;
     MainWindow(){
-
         setLayout(new GridLayout(3,1));
         view = new LoginandRegister();
         computerButton = new JButton("报名考试");
@@ -19,7 +19,6 @@ public class MainWindow extends JFrame implements ActionListener {
         // 设置背景
         JPanel j2=new JPanel();
         JLabel lblBackground = new JLabel(); // 创建一个标签组件对象
-        //        URL resource = this.getClass().getResource("D:/JavaProjects/JavaProject/src/image/NCRE.png"); // 获取背景图片路径
         ImageIcon icon = new ImageIcon("D:/JavaProjects/JavaProject/src/image/NCRE.png"); // 创建背景图片对象
         lblBackground.setIcon(icon); // 设置标签组件要显示的图标
         lblBackground.setBounds(350, 200, icon.getIconWidth(), icon.getIconHeight()); // 设置组件的显示位置及大小
@@ -44,11 +43,8 @@ public class MainWindow extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null,"请先登录","登录提示",JOptionPane.WARNING_MESSAGE);
         }
         else {//调用报名考试
-//            setVisible(false);// 本窗口隐藏,
-//            JFrame window = new JFrame();
             RFEview rfeview = new RFEview();
             rfeview.setRegisterForExam(view.loginView.getLogin());//把登录对象传入报名系统
-//            window.add(rfeview);
             rfeview.setVisible(true);
             rfeview.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             rfeview.setBounds(200, 200, 800, 260);
@@ -57,14 +53,7 @@ public class MainWindow extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                System.out.println("name:" + info.getName());
-//                System.out.println("class:" + info.getClassName());
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
+        try {//加载lookandfeel
             BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.generalNoTranslucencyShadow;
             org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
             UIManager.put("RootPane.setupButtonVisible",false);

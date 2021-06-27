@@ -1,6 +1,7 @@
 package pro.admin.delete;
 
 
+import pro.admin.query.Query;
 import tools.GetDBConnection;
 
 import java.awt.*;
@@ -100,6 +101,14 @@ public class DeleteView extends JPanel implements ActionListener{
                 if (con == null) {
                     return;
                 }
+                Query find =new Query();
+                find.setDatabaseName("ncre");
+                find.setSQL("select * from user where id='"+idtext.getText()+"' ");
+                String [][]str = find.getRecord();
+                if(str.length==0){//查找不到记录
+                    JOptionPane.showMessageDialog(null, "修改失败,因为该记录不存在", "修改失败", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 String sqlstr = "delete from user where id = ?";
                 try {
                     presql = con.prepareStatement(sqlstr);
@@ -119,6 +128,14 @@ public class DeleteView extends JPanel implements ActionListener{
                 if (con == null) {
                     return;
                 }
+                Query find =new Query();
+                find.setDatabaseName("ncre");
+                find.setSQL("select * from province_info where province ='"+provincetext.getText()+"' ");
+                String [][]str = find.getRecord();
+                if(str.length==0){//查找不到记录
+                    JOptionPane.showMessageDialog(null, "修改失败,因为该记录不存在", "修改失败", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 String sqlstr = "delete from province_info where province = ?";
                 try {
                     presql = con.prepareStatement(sqlstr);
@@ -136,11 +153,11 @@ public class DeleteView extends JPanel implements ActionListener{
 
     }
 
-    public static void main(String[] args) {
-        JFrame jFrame=new JFrame();
-        DeleteView kapian = new DeleteView();
-        jFrame.add(kapian);
-        jFrame.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        JFrame jFrame=new JFrame();
+//        DeleteView kapian = new DeleteView();
+//        jFrame.add(kapian);
+//        jFrame.setVisible(true);
+//    }
 
 }

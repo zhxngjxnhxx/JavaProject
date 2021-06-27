@@ -15,7 +15,7 @@ public class HandleRFE {
         con = GetDBConnection.connectionDB("ncre", "root", "0617");
     }
 
-    public void updateRFE(RegisterForExam registerForExam) {//可以设置考试报名限制 改为默认值为 x 每次报名x--，当x为0时，提醒不能报名
+    public void updateRFE(RegisterForExam registerForExam) {
         //先获取剩余名额
         String sqlstr="";
         if (registerForExam.getTolevel()==2){
@@ -41,27 +41,20 @@ public class HandleRFE {
             preSql = con.prepareStatement(sqlstr);
             rs = preSql.executeQuery(sqlstr);
         }
-        catch ( SQLException e ){
-
-        }
+        catch ( SQLException e ){ }
         try
         { if(rs!=null){
             while (rs.next()){
 
                 number = rs.getInt(1);
             }
-
-
         }
         }
-        catch ( SQLException e )
-        {
-            System.out.println(e);
-        }
+        catch ( SQLException e ) { System.out.println(e); }
 
 //        number =ExactSearch.doINTExactSearch(sqlstr);
 
-        if(number>0){
+        if(number>0){//有剩余名额
 
             if(registerForExam.toLevel==2&&registerForExam.login.getLevel()>=0){
                 sqlstr = "update province_info set number = number-1 where province = '"+registerForExam.getProvince()+"'";
@@ -88,19 +81,14 @@ public class HandleRFE {
 //            preSql.setString(1, registerForExam.login.getId());
             ok = preSql.executeUpdate();
             con.close();
-
-        } catch (SQLException e) {
-
         }
-
+        catch (SQLException e) { }
         if (ok != 0) {
             JOptionPane.showMessageDialog(null, "报名成功", "恭喜", JOptionPane.WARNING_MESSAGE);
         }
         }
         else {
             JOptionPane.showMessageDialog(null, "无剩余名额", "提示", JOptionPane.WARNING_MESSAGE);
-
         }
     }
-
 }

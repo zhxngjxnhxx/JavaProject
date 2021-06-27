@@ -1,3 +1,5 @@
+package pro.user;
+
 import pro.user.login.LoginView;
 import pro.user.register.RegisterView;
 import javax.swing.*;
@@ -6,7 +8,7 @@ import java.awt.*;
 public class LoginandRegister extends JPanel{
     JTabbedPane p;
     RegisterView registerView;
-    LoginView loginView;
+    public LoginView loginView;
     public LoginandRegister(){
         registerView=new RegisterView();
         loginView=new LoginView();

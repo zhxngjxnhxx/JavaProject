@@ -19,8 +19,8 @@ public class RegisterView extends JPanel implements ActionListener{
         add(inputID);
         add(new JLabel("密码:"));
         add(inputPassword);
-//        add(new JLabel("出生日期(****-**-**)"));
-//        add(inputBirth);
+        add(new JLabel("出生日期(****-**-**)"));
+        add(inputBirth);
         add(buttonRegister);
         buttonRegister.addActionListener((this));//点击注册按钮后会触发事件
     }

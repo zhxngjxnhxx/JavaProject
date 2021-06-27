@@ -1,5 +1,4 @@
 package pro.admin.easyoperate;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,29 +6,28 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Vector;
-
 import javax.swing.JOptionPane;
 
 public class PutinStorage {
     // 得到数据库表数据
-    public static Vector getRows(){
-        String sql_url = "jdbc:mysql://localhost:3306/ncre";	//数据库路径（一般都是这样写），test是数据库名称
+    public static Vector getRows(int flag){
+        String sql_url = "jdbc:mysql://localhost:3306/ncre";
         String name = "root";		//用户名
         String password = "0617";	//密码
         Connection conn;
         PreparedStatement preparedStatement = null;
-
-        Vector rows = null;
-        Vector columnHeads = null;
+        Vector rows = null;//存储数据
+        Vector columnHeads = null;//存储表头名
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");		//连接驱动
             conn = DriverManager.getConnection(sql_url, name, password);	//连接数据库
             			if(!conn.isClosed())
             				System.out.println("成功连接数据库");
-            preparedStatement = conn.prepareStatement("select * from user_test");
-            ResultSet result1 = null;
-            result1 = preparedStatement.executeQuery();
+
+            if(flag==1) preparedStatement = conn.prepareStatement("select * from user_copy");
+            else if (flag==2) preparedStatement = conn.prepareStatement("select * from province_info_copy");
+            ResultSet result1 = preparedStatement.executeQuery();
             System.out.println(conn);
 //            if(result1.wasNull()){
 //                JOptionPane.showMessageDialog(null, "结果集中无记录");
@@ -55,13 +53,12 @@ public class PutinStorage {
     }
 
     // 得到数据库表头
-    public static Vector getHead(){
+    public static Vector getHead(int flag){
         String sql_url = "jdbc:mysql://localhost:3306/ncre";	//数据库路径（一般都是这样写），test是数据库名称
         String name = "root";		//用户名
         String password = "0617";	//密码
         Connection conn;
         PreparedStatement preparedStatement = null;
-
         Vector columnHeads = null;
 
         try {
@@ -69,9 +66,10 @@ public class PutinStorage {
             conn = DriverManager.getConnection(sql_url, name, password);	//连接数据库
             //			if(!conn.isClosed())
             //				System.out.println("成功连接数据库");
-            preparedStatement = conn.prepareStatement("select * from user_test");
-            ResultSet result1 = preparedStatement.executeQuery();
-
+            if(flag==1) preparedStatement = conn.prepareStatement("select * from user_copy");
+            else if (flag==2) preparedStatement = conn.prepareStatement("select * from province_info_copy");
+            ResultSet result1=null;
+            result1 = preparedStatement.executeQuery();
             boolean moreRecords = result1.next();
             if(!moreRecords)
                 JOptionPane.showMessageDialog(null, "结果集中无记录");
@@ -97,13 +95,9 @@ public class PutinStorage {
     private static Vector getNextRow(ResultSet rs,ResultSetMetaData rsmd) throws SQLException{
         Vector currentRow = new Vector();
         for(int i = 1; i <= rsmd.getColumnCount(); i++){
-            currentRow.addElement(rs.getString(i));
+            currentRow.addElement(rs.getString(i));//当前行 添加元素
         }
         return currentRow;
     }
 
-	/*//主函数
-	 public static void main(String[] args){
-		 getRows();
-	}*/
 }

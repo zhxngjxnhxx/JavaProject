@@ -4,6 +4,7 @@ import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
 import pro.admin.change.Change;
 import pro.admin.delete.DeleteView;
 import pro.admin.easyoperate.EasyOperate;
+import pro.admin.easyoperate.EasyView;
 import pro.admin.insert.insertview;
 import pro.admin.query.ConditionQuery;
 import pro.admin.query.Generalquery;
@@ -24,7 +25,7 @@ public class AdminView extends JFrame implements ActionListener {
         insertview iv =new insertview();
         DeleteView dv=new DeleteView();
         Change chg =new Change();
-        EasyOperate eo =new EasyOperate();
+        EasyView ev =new EasyView();
         setLayout(new GridLayout());
         p = new JTabbedPane();
 
@@ -33,7 +34,7 @@ public class AdminView extends JFrame implements ActionListener {
         p.add("插入", iv);
         p.add("删除", dv);
         p.add("修改", chg);
-        p.add("可视化操作",eo);
+        p.add("可视化操作",ev);
         p.validate();
         add(p);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -46,12 +47,6 @@ public class AdminView extends JFrame implements ActionListener {
     public static void main(String[] args) {
 
         try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
             BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.generalNoTranslucencyShadow;
             org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
             UIManager.put("RootPane.setupButtonVisible",false);

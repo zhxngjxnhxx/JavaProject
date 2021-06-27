@@ -1,5 +1,5 @@
-package pro.admin;
 import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
+import pro.admin.AdminView;
 import pro.user.login.HandleLogin;
 import pro.user.login.Login;
 import tools.InitGlobalFont;
@@ -33,7 +33,6 @@ public class AdminLogin extends JFrame implements ActionListener {
         j1.add(buttonLogin);
         // 设置背景
         JLabel lblBackground = new JLabel(); // 创建一个标签组件对象
-        //        URL resource = this.getClass().getResource("D:/JavaProjects/JavaProject/src/image/NCRE.png"); // 获取背景图片路径
         ImageIcon icon = new ImageIcon("D:/JavaProjects/JavaProject/src/image/NCRE.png"); // 创建背景图片对象
         lblBackground.setIcon(icon); // 设置标签组件要显示的图标
         lblBackground.setBounds(350, 200, icon.getIconWidth(), icon.getIconHeight()); // 设置组件的显示位置及大小
@@ -51,6 +50,9 @@ public class AdminLogin extends JFrame implements ActionListener {
         return loginSucess;
     }
     public void actionPerformed(ActionEvent e){
+        if(inputID.getText().equals("admin")){//登录账号为admin才执行下面操作
+
+
         login.setID(inputID.getText());
         char []pw=inputPassword.getPassword();
         login.setPassword(new String(pw));
@@ -74,6 +76,10 @@ public class AdminLogin extends JFrame implements ActionListener {
             int screenHeight = screenSize.height;
             int screenWidth = screenSize.width;
             adv.setBounds(screenWidth/4, screenHeight/4, screenWidth/2, screenHeight/2);
+        }
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"登录失败,因为您不是管理员","登录失败",JOptionPane.WARNING_MESSAGE);
         }
     }
 
